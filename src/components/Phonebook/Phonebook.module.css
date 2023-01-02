@@ -1,0 +1,15 @@
+.container {
+    margin: 0 auto;
+    width: 1280px;
+}
+
+.sectionPhonebook {
+    margin-bottom: 70px;
+}
+
+.formPhonebook {
+    border: 1px solid black;
+    padding: 20px;
+    width: 320px;
+    display: flex;
+}

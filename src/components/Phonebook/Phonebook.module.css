@@ -4,7 +4,11 @@
 }
 
 .sectionPhonebook {
-    margin-bottom: 70px;
+    margin-bottom: 50px;
+}
+
+.sectionSubHeader{
+    margin: 0;
 }
 
 .formPhonebook {
@@ -12,4 +16,6 @@
     padding: 20px;
     width: 320px;
     display: flex;
+    flex-direction: column;
+    row-gap: 20px;
 }

@@ -3,6 +3,7 @@ import { Component } from "react";
 import { ContactForm } from "./ContactForm/ContactForm";
 import { ContactList } from "./ContactList/ContactList";
 import { Filter } from "./Filter/Filter";
+import { Section } from './Section/Section';
 import css from "./ContactForm/ContactForm.module.css";
 
 export class App extends Component {
@@ -47,42 +48,43 @@ export class App extends Component {
   getVisibleContacts = () => {  
     const { filter, contacts } = this.state;
 
-    const normolizedFilter = filter.toLowerCase().trim();
+    const normalizedFilter = filter.toLowerCase().trim();
     return (
       contacts.filter(contact =>
-        contact.name.toLowerCase().includes(normolizedFilter)
+        contact.name.toLowerCase().includes(normalizedFilter)
       )
     )
   };
 
   render() {
     const visibleContacts = this.getVisibleContacts();
-    const { filter, contacts } = this.state;
+    const { filter } = this.state;
     const { addContact, changeFilter, deleteContact } = this;
 
     return (
         <div className={css.container}>
-
-          <section className={css.sectionPhonebook}>
-            <h2 className={css.sectionHeader}>Phonebook</h2>
+          <Section
+            title="Phonebook"
+          >
             <ContactForm 
               onSubmit={addContact}
             />
-          </section>
+          </Section>
 
           <Filter 
             value={filter} 
             onChange={changeFilter}
           />
 
-          <section className={css.sectionContacts}>
-            <h2 className={css.sectionHeader}>Contacts</h2>
-            <p>Total number of contacts in the phonebook: {contacts.length}</p>
+          <Section
+            title="Contacts"
+          >
+            <p>Total number of contacts in the phonebook: {visibleContacts.length}</p>
             <ContactList
               contacts={visibleContacts}
               onDelete={deleteContact}
             />
-          </section>
+          </Section>
 
       </div>
     );

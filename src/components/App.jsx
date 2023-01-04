@@ -9,24 +9,24 @@ export class App extends Component {
 
   state = {
     contacts: [
-      {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-      {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-      {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-      {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
+      {id: nanoid(), name: 'Rosie Simpson', number: '459-12-56'},
+      {id: nanoid(), name: 'Hermione Kline', number: '443-89-12'},
+      {id: nanoid(), name: 'Eden Clements', number: '645-17-79'},
+      {id: nanoid(), name: 'Annie Copeland', number: '227-91-26'},
     ],
     filter: '',
   };
 
   addContact = ({ name, number }) => {
+    const { contacts } = this.state;
 
     const newContact = {
       name,
       number,
       id: nanoid(),
     };
-    console.log(newContact);
 
-    this.state.contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase())
+    contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase())
       ? alert(`${name} is already on contacts`)
       : this.setState(({ contacts }) => ({
           contacts: [newContact, ...contacts],
@@ -46,6 +46,7 @@ export class App extends Component {
 
   getVisibleContacts = () => {  
     const { filter, contacts } = this.state;
+
     const normolizedFilter = filter.toLowerCase().trim();
     return (
       contacts.filter(contact =>
@@ -56,27 +57,34 @@ export class App extends Component {
 
   render() {
     const visibleContacts = this.getVisibleContacts();
+    const { filter, contacts } = this.state;
+    const { addContact, changeFilter, deleteContact } = this;
+
     return (
         <div className={css.container}>
-          <section className={css.sectionPhonebook}>
-              <h2 className={css.sectionHeader}>Phonebook</h2>
-              <ContactForm 
-                onSubmit={this.addContact}
-              />
-          </section>
-          <Filter 
-              value={this.state.filter} 
-              onChange={this.changeFilter}
-            />
-            <section className={css.sectionContacts}>
-              <h2 className={css.sectionHeader}>Contacts</h2>
-              <ContactList
-                contacts={visibleContacts}
-                onDelete={this.deleteContact}
-              />
-            </section>
-      </div>
 
+          <section className={css.sectionPhonebook}>
+            <h2 className={css.sectionHeader}>Phonebook</h2>
+            <ContactForm 
+              onSubmit={addContact}
+            />
+          </section>
+
+          <Filter 
+            value={filter} 
+            onChange={changeFilter}
+          />
+
+          <section className={css.sectionContacts}>
+            <h2 className={css.sectionHeader}>Contacts</h2>
+            <p>Total number of contacts in the phonebook: {contacts.length}</p>
+            <ContactList
+              contacts={visibleContacts}
+              onDelete={deleteContact}
+            />
+          </section>
+
+      </div>
     );
   }
 };

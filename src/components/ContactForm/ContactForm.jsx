@@ -1,5 +1,4 @@
 import { Component } from "react";
-// import { Contact } from 'components/Contact/Contact';
 import css from './ContactForm.module.css';
 
 export class ContactForm extends Component {
@@ -27,8 +26,11 @@ export class ContactForm extends Component {
     }
 
     render () {
+        const { name, number } = this.state;
+        const { handleSubmit, handleChange } = this
+
         return (
-            <form className={css.formPhonebook} onSubmit={this.handleSubmit}>
+            <form className={css.formPhonebook} onSubmit={handleSubmit}>
                 <h3 className={css.sectionSubHeader}>Name</h3>
                 <input
                     className={css.input}
@@ -37,8 +39,8 @@ export class ContactForm extends Component {
                     pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                     title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                     required
-                    value={this.state.name}
-                    onChange={this.handleChange}
+                    value={name}
+                    onChange={handleChange}
                 ></input>
 
                 <h3 className={css.sectionSubHeader}>Number</h3>
@@ -49,14 +51,14 @@ export class ContactForm extends Component {
                     pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                     title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                     required
-                    value={this.state.number}
-                    onChange={this.handleChange}
+                    value={number}
+                    onChange={handleChange}
                 />
 
                 <button
                     className={css.btn}
                     type="submit"
-                    disabled={!this.state.name || !this.state.number}
+                    disabled={!name || !number}
                 >Add contact</button>
             </form>
 

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import { Component } from "react";
 import { ContactForm } from "./ContactForm/ContactForm";
@@ -89,4 +90,12 @@ export class App extends Component {
       </div>
     );
   }
+};
+
+App.propType = {
+  filter: PropTypes.string.isRequired,
+  addContact: PropTypes.func.isRequired,
+  changeFilter: PropTypes.func.isRequired,
+  visibleContacts: PropTypes.func.isRequired,
+  deleteContact: PropTypes.func.isRequired,
 };

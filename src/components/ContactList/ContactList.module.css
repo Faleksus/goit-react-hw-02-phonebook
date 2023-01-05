@@ -3,9 +3,3 @@
     gap: 20px;
     flex-direction: column;
 }
-
-.btn:hover,
-.btn:focus {
-    color: red;
-    border: 1px solid red;
-}

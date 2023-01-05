@@ -11,3 +11,9 @@
     cursor: pointer;
     padding: 3px 10px;
 }
+
+.btn:hover,
+.btn:focus {
+    color: red;
+    border: 1px solid red;
+}
